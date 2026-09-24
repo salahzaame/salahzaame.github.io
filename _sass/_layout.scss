@@ -217,62 +217,6 @@
   width: 100%;
   min-width: 0;
   padding-block: 56px 112px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 48px;
-
-  @media (max-width: 900px) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-  }
-}
-
-// Pixel-art portrait on a debossed plate. Rendered at an exact integer
-// multiple of the 64px sprite so every pixel stays crisp.
-.hero-portrait {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 36px 36px 0;
-  border-radius: 28px;
-  background: var(--paper);
-  @include sunk(6px, 14px);
-  overflow: hidden;
-
-  img {
-    display: block;
-    width: 320px; // 5x
-    height: auto;
-    image-rendering: pixelated;
-    transition: transform 0.2s steps(2);
-  }
-
-  // Two-frame "idle bob" on hover, like a game sprite
-  &:hover img {
-    animation: sprite-bob 0.8s steps(1) infinite;
-  }
-
-  @media (max-width: 900px) {
-    order: -1;
-    justify-self: start;
-    padding: 20px 20px 0;
-    border-radius: 20px;
-
-    img {
-      width: 192px; // 3x
-    }
-  }
-
-  @media (max-width: $bp-mobile) {
-    img {
-      width: 128px; // 2x
-    }
-  }
-}
-
-@keyframes sprite-bob {
-  50% { transform: translateY(-5px); }
 }
 
 .eyebrow {
