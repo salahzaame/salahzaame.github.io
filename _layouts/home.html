@@ -4,16 +4,21 @@ layout: default
 <section class="hero" aria-labelledby="hero-title">
   <canvas class="hero-canvas" data-flock aria-hidden="true"></canvas>
   <div class="wrapper wrapper--wide hero-inner">
-    <p class="eyebrow">// {{ site.tagline | downcase | escape }}</p>
-    <h1 class="hero-title" id="hero-title">Latent <em>Space</em><span class="caret" aria-hidden="true"></span></h1>
-    <p class="hero-lede">
-      Field notes on model architectures, agentic systems, and what actually survives contact with production.
-      Written by <a href="{{ '/about/' | relative_url }}">{{ site.author.name | escape }}</a>, AI engineer.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="#writing">Read the latest <span aria-hidden="true">↓</span></a>
-      <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
+    <div class="hero-text">
+      <p class="eyebrow">// {{ site.tagline | downcase | escape }}</p>
+      <h1 class="hero-title" id="hero-title">Latent <em>Space</em><span class="caret" aria-hidden="true"></span></h1>
+      <p class="hero-lede">
+        Field notes on model architectures, agentic systems, and what actually survives contact with production.
+        Written by <a href="{{ '/about/' | relative_url }}">{{ site.author.name | escape }}</a>, AI engineer.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="#writing">Read the latest <span aria-hidden="true">↓</span></a>
+        <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
+      </div>
     </div>
+    <a class="hero-portrait" href="{{ '/about/' | relative_url }}" aria-label="About {{ site.author.name | escape }}">
+      <img src="{{ '/assets/img/salah-pixel.png' | relative_url }}" alt="Pixel-art portrait of {{ site.author.name | escape }}" width="64" height="79">
+    </a>
   </div>
 </section>
 

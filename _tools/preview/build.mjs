@@ -96,6 +96,5 @@ for (const [i, f] of pageFiles.entries()) {
 const scss = parse(`${SRC}/assets/css/main.scss`).body;
 const css = sass.compileString(scss, { loadPaths: [`${SRC}/_sass`], silenceDeprecations: ['import', 'slash-div', 'global-builtin'] }).css;
 write('/assets/css/main.css', css);
-fs.cpSync(`${SRC}/assets/js`, path.join(OUT, 'assets/js'), { recursive: true });
-fs.copyFileSync(`${SRC}/assets/favicon.svg`, path.join(OUT, 'assets/favicon.svg'));
+fs.cpSync(`${SRC}/assets`, path.join(OUT, 'assets'), { recursive: true, filter: (p) => !p.endsWith('.scss') });
 console.log('built', posts.length, 'posts,', pageFiles.length, 'pages →', OUT);
