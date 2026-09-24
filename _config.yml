@@ -1,0 +1,36 @@
+# Site settings
+# Accessible in templates via {{ site.title }}, {{ site.author.name }}, etc.
+# This file is NOT reloaded by `jekyll serve` — restart the server after editing.
+
+title: Latent Space
+tagline: AI engineering, from the hidden layers up.
+description: >-
+  Notes on AI engineering by Salah-eddine Zaame: model architectures,
+  agentic systems, and what actually works in production.
+url: "https://salahzaame.github.io"
+baseurl: ""
+lang: en
+
+author:
+  name: Salah-eddine Zaame
+  bio: >-
+    AI Engineer based in France (Polytech Lille). I write about model
+    architectures, agentic systems, and the practical side of shipping AI.
+  email: zaamesalah@gmail.com
+  linkedin: salah-eddine-zaame
+
+github_username: salahzaame
+
+# Only show these pages in the top nav
+header_pages:
+  - about.markdown
+
+# Build settings
+plugins:
+  - jekyll-feed
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

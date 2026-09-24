@@ -1,0 +1,19 @@
+// Colors
+$bg-color: #EAE0D5; // Almond Cream
+$text-color: #0A0908; // Black
+$link-color: #5E503F; // Stone Brown
+$accent-color: #D35400; // Orange Accent
+$link-hover-color: $accent-color; // Orange Accent
+$border-color: #C6AC8F; // Khaki Beige
+$glass-bg: rgba(234, 224, 213, 0.65); // Semi-transparent Almond Cream
+
+// Fonts
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-serif: 'Merriweather', "Times New Roman", Times, serif;
+
+// Layout
+$content-width: 700px;
+$spacing-unit: 30px;
+
+// Transitions
+$transition-speed: 0.3s;

@@ -1,0 +1,45 @@
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: $text-color;
+  background-color: $bg-color;
+  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.08"/%3E%3C/svg%3E'); /* Stronger grain texture */
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-sans;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: $spacing-unit / 2;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  transition: color $transition-speed ease;
+  
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+.wrapper {
+  max-width: $content-width;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+}
+
+main.page-content {
+  padding-top: 100px; /* Space for fixed header */
+  padding-bottom: $spacing-unit * 2;
+  min-height: 80vh;
+}

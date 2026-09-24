@@ -1,0 +1,161 @@
+.home {
+  .post-list-heading {
+    font-size: 1.5rem;
+    margin-bottom: $spacing-unit;
+    margin-top: $spacing-unit;
+  }
+  
+  .post-list {
+    list-style: none;
+  }
+  
+  .post-meta {
+    font-family: $font-sans;
+    font-size: 0.85rem;
+    color: lighten($text-color, 30%);
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .post-link {
+    display: block;
+    font-size: 1.4rem;
+    color: $text-color;
+    margin-bottom: 10px;
+    transition: color $transition-speed ease;
+    
+    &:hover {
+      text-decoration: none;
+      color: $accent-color;
+    }
+  }
+  
+  .post-excerpt {
+    font-size: 1rem;
+    color: lighten($text-color, 15%);
+  }
+}
+
+.post-header {
+  margin-bottom: $spacing-unit * 1.5;
+  text-align: center;
+  
+  .post-title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  
+  .post-meta {
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    color: lighten($text-color, 30%);
+    margin-top: 10px;
+  }
+}
+
+.post-content {
+  h2, h3, h4 {
+    margin-top: $spacing-unit * 1.5;
+  }
+  
+  p {
+    margin-bottom: $spacing-unit;
+  }
+  
+  a {
+    text-decoration: underline;
+    text-decoration-color: $border-color;
+    text-underline-offset: 3px;
+    
+    &:hover {
+      text-decoration-color: $link-hover-color;
+    }
+  }
+  
+  blockquote {
+    border-left: 4px solid $accent-color;
+    padding-left: 15px;
+    color: lighten($text-color, 20%);
+    font-style: italic;
+    margin-bottom: $spacing-unit;
+  }
+
+  // Animated Mermaid diagrams: posts only need <div class="mermaid">...</div>
+  // !important overrides Mermaid's inline SVG styles
+  .mermaid {
+    margin-bottom: $spacing-unit;
+    overflow-x: auto;
+
+    .edgePath path {
+      stroke-dasharray: 8 !important;
+      animation: flow_mermaid 0.6s linear infinite !important;
+      stroke: $link-color !important;
+    }
+
+    marker path {
+      fill: $link-color !important;
+      stroke: $link-color !important;
+    }
+  }
+}
+
+@keyframes flow_mermaid {
+  from { stroke-dashoffset: 16; }
+  to { stroke-dashoffset: 0; }
+}
+
+.author-box {
+  margin-top: $spacing-unit * 2;
+  border-left: 4px solid $accent-color;
+  font-family: $font-sans;
+
+  &:hover {
+    transform: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .author-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: lighten($text-color, 40%);
+  }
+
+  .author-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+
+    a {
+      color: $text-color;
+
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+
+  .author-bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: lighten($text-color, 15%);
+    margin-bottom: 12px;
+  }
+
+  .author-links {
+    font-size: 0.9rem;
+
+    a {
+      color: $accent-color;
+    }
+
+    span {
+      margin: 0 6px;
+      color: $border-color;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<aside class="author-box glass-card">
+  <p class="author-label">Written by</p>
+  <p class="author-name"><a href="{{ "/about/" | relative_url }}">{{ site.author.name | escape }}</a></p>
+  <p class="author-bio">{{ site.author.bio | escape }}</p>
+  <p class="author-links">
+    <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}/" target="_blank" rel="noopener">LinkedIn</a>
+    <span aria-hidden="true">·</span>
+    <a href="{{ "/feed.xml" | relative_url }}">RSS</a>
+  </p>
+</aside>
