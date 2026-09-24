@@ -275,32 +275,6 @@
   gap: 16px;
 }
 
-.hero-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 22px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  @include mono-label;
-  font-size: 0.7rem;
-  color: var(--muted);
-
-  > span {
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  @media (max-width: $bp-mobile) {
-    .hero-hint {
-      display: none;
-    }
-  }
-}
-
 // ---------------------------------------------------------------- Sections
 
 .section-head {

@@ -79,16 +79,6 @@
   h3 { font-size: 1.45rem; }
   h4 { font-size: 1.15rem; }
 
-  h2::before, h3::before {
-    content: "§";
-    margin-right: 0.45em;
-    font-family: $font-mono;
-    font-size: 0.62em;
-    font-weight: 400;
-    vertical-align: 0.22em;
-    color: var(--accent);
-  }
-
   strong {
     font-weight: 700;
     color: var(--ink);

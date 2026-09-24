@@ -7,7 +7,6 @@
   if (!canvas || !canvas.getContext) return;
 
   var ctx = canvas.getContext('2d');
-  var countLabel = document.querySelector('[data-flock-count]');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var P = {
@@ -68,7 +67,6 @@
     var target = Math.round(Math.min(140, Math.max(45, (W * H) / 9500)));
     while (birds.length < target) birds.push(spawn());
     birds.length = target;
-    if (countLabel) countLabel.textContent = 'n=' + target;
     if (!running) draw();
   }
 
