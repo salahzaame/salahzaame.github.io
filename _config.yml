@@ -10,6 +10,7 @@ description: >-
 url: "https://salahzaame.github.io"
 baseurl: ""
 lang: en
+timezone: Europe/Paris
 
 author:
   name: Salah-eddine Zaame
