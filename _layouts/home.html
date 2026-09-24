@@ -1,24 +1,59 @@
 ---
 layout: default
 ---
+<section class="hero" aria-labelledby="hero-title">
+  <canvas class="hero-canvas" data-flock aria-hidden="true"></canvas>
+  <div class="wrapper wrapper--wide hero-inner">
+    <p class="eyebrow">// {{ site.tagline | downcase | escape }}</p>
+    <h1 class="hero-title" id="hero-title">Latent <em>Space</em><span class="caret" aria-hidden="true"></span></h1>
+    <p class="hero-lede">
+      Field notes on model architectures, agentic systems, and what actually survives contact with production.
+      Written by <a href="{{ '/about/' | relative_url }}">{{ site.author.name | escape }}</a>, AI engineer.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="#writing">Read the latest <span aria-hidden="true">↓</span></a>
+      <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
+    </div>
+  </div>
+  <div class="wrapper wrapper--wide hero-caption" aria-hidden="true">
+    <span>fig. 00 — <span data-flock-count>n</span> agents · separation · alignment · cohesion</span>
+    <span class="hero-hint">move your cursor to perturb the field ↗</span>
+  </div>
+</section>
 
-<div class="home">
+<section class="writing wrapper wrapper--mid" id="writing">
   {{ content }}
+  <header class="section-head">
+    <span class="section-index">01</span>
+    <h2 class="section-title">Writing</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+    <span class="section-count">{{ site.posts.size }} {% if site.posts.size == 1 %}entry{% else %}entries{% endif %}</span>
+  </header>
 
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Recent Posts" }}</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li class="glass-card">
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        <div class="post-excerpt">{{ post.excerpt }}</div>
-      </li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
-</div>
+  {%- if site.posts.size > 0 %}
+  <ol class="post-list" reversed>
+    {%- for post in site.posts %}
+    {%- assign post_no = site.posts.size | minus: forloop.index0 | prepend: '00' | slice: -3, 3 %}
+    <li>
+      <a class="post-card" href="{{ post.url | relative_url }}">
+        <div class="post-card-meta">
+          <span class="post-card-no">#{{ post_no }}</span>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time>
+          {%- for category in post.categories %}
+          <span class="tag">{{ category | escape }}</span>
+          {%- endfor %}
+          <span>{% include reading-time.html content=post.content %}</span>
+        </div>
+        <h3 class="post-card-title">{{ post.title | escape }}</h3>
+        <p class="post-card-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 240 }}</p>
+        <span class="post-card-cta">Read entry <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="empty-state">// first entry compiling…</p>
+  {%- endif %}
+</section>
+
+<script src="{{ '/assets/js/flock.js' | relative_url }}" defer></script>

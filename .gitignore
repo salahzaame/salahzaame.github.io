@@ -5,3 +5,6 @@ _site/
 vendor/
 .bundle/
 Gemfile.lock
+node_modules/
+_tools/preview/site/
+_tools/preview/shots/

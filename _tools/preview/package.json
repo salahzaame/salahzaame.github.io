@@ -1,0 +1,18 @@
+{
+  "name": "latent-space-preview",
+  "private": true,
+  "type": "module",
+  "description": "Approximate local Jekyll render (no Ruby needed) + screenshots via Edge",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "python -m http.server 4000 --bind 127.0.0.1 --directory site",
+    "shots": "node shots.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "liquidjs": "^10.0.0",
+    "markdown-it": "^14.0.0",
+    "puppeteer-core": "^24.0.0",
+    "sass": "^1.80.0"
+  }
+}

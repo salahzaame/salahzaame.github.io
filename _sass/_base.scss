@@ -1,45 +1,181 @@
+// Theme tokens. [data-theme] is set in <head> before paint (see head.html).
+:root {
+  --paper: #EAE0D5;        // almond cream
+  --paper-sunk: #E2D6C8;
+  --ink: #0A0908;
+  --ink-soft: #22333B;     // slate
+  --muted: #5E503F;        // stone brown
+  --rule: #C6AC8F;         // khaki
+  --rule-soft: rgba(198, 172, 143, 0.45);
+  --accent: #D35400;       // signal orange: decoration & large type
+  --accent-text: #A84300;  // signal orange darkened for AA body text
+  --shadow-light: rgba(255, 251, 245, 0.9);
+  --shadow-dark: rgba(150, 128, 102, 0.4);
+  --glass: rgba(234, 224, 213, 0.72);
+  --grid: rgba(94, 80, 63, 0.16);
+  --grain-opacity: 0.1;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --paper: #182025;        // night paper
+  --paper-sunk: #131A1E;
+  --ink: #EAE0D5;
+  --ink-soft: #DCCFC0;
+  --muted: #B3A28D;
+  --rule: #3C4952;
+  --rule-soft: rgba(234, 224, 213, 0.1);
+  --accent: #E8783A;
+  --accent-text: #F0915A;
+  --shadow-light: rgba(255, 255, 255, 0.045);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+  --glass: rgba(24, 32, 37, 0.78);
+  --grid: rgba(234, 224, 213, 0.08);
+  --grain-opacity: 0.05;
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure {
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $header-height + 24px;
+}
+
 body {
   font-family: $font-serif;
-  font-size: 18px;
-  line-height: 1.7;
-  color: $text-color;
-  background-color: $bg-color;
-  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.08"/%3E%3C/svg%3E'); /* Stronger grain texture */
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
+  transition: background-color $transition-speed ease, color $transition-speed ease;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 17px;
+  }
+}
+
+// Paper grain laid over everything, so even the canvas reads as printed.
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] body::before {
+  filter: invert(1);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-sans;
+  font-family: $font-display;
   font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: $spacing-unit / 2;
+  font-optical-sizing: auto;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
 }
 
 a {
-  color: $link-color;
+  color: inherit;
   text-decoration: none;
   transition: color $transition-speed ease;
-  
-  &:hover {
-    color: $link-hover-color;
-  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .wrapper {
   max-width: $content-width;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: $spacing-unit;
-  padding-left: $spacing-unit;
+  margin-inline: auto;
+  padding-inline: $spacing-unit;
+
+  @media (max-width: $bp-mobile) {
+    padding-inline: 20px;
+  }
+}
+
+.wrapper--mid {
+  max-width: $mid-width;
+}
+
+.wrapper--wide {
+  max-width: $wide-width;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 400;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink-soft);
+  color: var(--paper);
+  @include mono-label;
+
+  &:focus {
+    top: 12px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 main.page-content {
-  padding-top: 100px; /* Space for fixed header */
-  padding-bottom: $spacing-unit * 2;
-  min-height: 80vh;
+  padding-top: $header-height + 56px;
+  padding-bottom: 96px;
+  min-height: 70vh;
+}
+
+.home-layout main.page-content {
+  padding-top: 0;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

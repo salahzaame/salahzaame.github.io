@@ -1,17 +1,42 @@
 ---
 layout: default
 ---
-<article class="post">
+<article class="post wrapper">
   <header class="post-header">
+    <p class="post-path"><a href="{{ '/' | relative_url }}">~</a>/{% for category in page.categories %}{{ category | escape }}/{% endfor %}{{ page.slug }}.md</p>
     <h1 class="post-title">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%b %-d, %Y" }}
-      </time>
-    </p>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time>
+      <span class="sep" aria-hidden="true">/</span>
+      <span>{% include reading-time.html content=content %}</span>
+      {%- for category in page.categories %}
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="tag">{{ category | escape }}</span>
+      {%- endfor %}
+    </div>
   </header>
+
   <div class="post-content">
     {{ content }}
   </div>
-  {%- include author-box.html -%}
+
+  <footer class="post-footer">
+    {%- include author-box.html -%}
+    {%- if page.previous or page.next %}
+    <nav class="post-nav" aria-label="More posts">
+      {%- if page.previous %}
+      <a class="post-nav-prev" href="{{ page.previous.url | relative_url }}">
+        <span>← previous entry</span>
+        <strong>{{ page.previous.title | escape }}</strong>
+      </a>
+      {%- endif %}
+      {%- if page.next %}
+      <a class="post-nav-next" href="{{ page.next.url | relative_url }}">
+        <span>next entry →</span>
+        <strong>{{ page.next.title | escape }}</strong>
+      </a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+  </footer>
 </article>

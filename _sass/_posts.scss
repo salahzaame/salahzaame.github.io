@@ -1,101 +1,261 @@
-.home {
-  .post-list-heading {
-    font-size: 1.5rem;
-    margin-bottom: $spacing-unit;
-    margin-top: $spacing-unit;
-  }
-  
-  .post-list {
-    list-style: none;
-  }
-  
-  .post-meta {
-    font-family: $font-sans;
-    font-size: 0.85rem;
-    color: lighten($text-color, 30%);
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .post-link {
-    display: block;
-    font-size: 1.4rem;
-    color: $text-color;
-    margin-bottom: 10px;
-    transition: color $transition-speed ease;
-    
-    &:hover {
-      text-decoration: none;
-      color: $accent-color;
-    }
-  }
-  
-  .post-excerpt {
-    font-size: 1rem;
-    color: lighten($text-color, 15%);
-  }
-}
+// ---------------------------------------------------------------- Post & page header
 
 .post-header {
-  margin-bottom: $spacing-unit * 1.5;
-  text-align: center;
-  
-  .post-title {
-    font-size: 2.5rem;
-    letter-spacing: -1px;
-    line-height: 1.1;
-  }
-  
-  .post-meta {
-    font-family: $font-sans;
-    font-size: 0.9rem;
-    color: lighten($text-color, 30%);
-    margin-top: 10px;
+  margin-bottom: 48px;
+}
+
+.post-path {
+  @include mono-label;
+  color: var(--muted);
+  margin-bottom: 22px;
+  overflow-wrap: anywhere;
+
+  a {
+    color: var(--accent-text);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
+.post-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+
+.page-subtitle {
+  @include mono-label;
+  font-size: 0.85rem;
+  color: var(--accent-text);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding-block: 14px;
+  border-block: 1px dashed var(--rule);
+  @include mono-label;
+  font-size: 0.78rem;
+  color: var(--muted);
+
+  .sep {
+    color: var(--rule);
+  }
+}
+
+// ---------------------------------------------------------------- Prose
+
 .post-content {
+  counter-reset: fig;
+
+  > * {
+    margin-bottom: 1.35em;
+  }
+
+  // Drop cap on the opening paragraph
+  > p:first-child::first-letter {
+    float: left;
+    font-family: $font-display;
+    font-size: 3.7em;
+    font-weight: 600;
+    line-height: 0.82;
+    padding: 0.08em 0.1em 0 0;
+    color: var(--accent);
+  }
+
   h2, h3, h4 {
-    margin-top: $spacing-unit * 1.5;
+    margin-top: 2.2em;
+    margin-bottom: 0.7em;
   }
-  
-  p {
-    margin-bottom: $spacing-unit;
+
+  h2 { font-size: 1.85rem; }
+  h3 { font-size: 1.45rem; }
+  h4 { font-size: 1.15rem; }
+
+  h2::before, h3::before {
+    content: "§";
+    margin-right: 0.45em;
+    font-family: $font-mono;
+    font-size: 0.62em;
+    font-weight: 400;
+    vertical-align: 0.22em;
+    color: var(--accent);
   }
-  
-  a {
+
+  strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  a:not(.pill) {
     text-decoration: underline;
-    text-decoration-color: $border-color;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1.5px;
     text-underline-offset: 3px;
-    
+    transition: background-size 0.3s ease, color $transition-speed ease;
+    // Highlighter-pen sweep on hover
+    background: linear-gradient(transparent 62%, rgba(211, 84, 0, 0.2) 62%) no-repeat 0 0 / 0% 100%;
+
     &:hover {
-      text-decoration-color: $link-hover-color;
+      background-size: 100% 100%;
     }
   }
-  
-  blockquote {
-    border-left: 4px solid $accent-color;
-    padding-left: 15px;
-    color: lighten($text-color, 20%);
-    font-style: italic;
-    margin-bottom: $spacing-unit;
+
+  ul, ol {
+    padding-left: 1.4em;
   }
 
-  // Animated Mermaid diagrams: posts only need <div class="mermaid">...</div>
-  // !important overrides Mermaid's inline SVG styles
-  .mermaid {
-    margin-bottom: $spacing-unit;
-    overflow-x: auto;
+  li {
+    margin-bottom: 0.55em;
+    padding-left: 0.3em;
+  }
 
-    .edgePath path {
+  li::marker {
+    color: var(--accent);
+    font-family: $font-mono;
+  }
+
+  blockquote {
+    margin-block: 2em;
+    padding: 4px 0 4px 24px;
+    border-left: 2px solid var(--accent);
+    font-family: $font-display;
+    font-style: italic;
+    font-size: 1.2em;
+    line-height: 1.55;
+    color: var(--ink-soft);
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.82em;
+    padding: 0.12em 0.42em;
+    border-radius: 6px;
+    background: var(--paper-sunk);
+    color: var(--ink-soft);
+  }
+
+  pre {
+    font-family: $font-mono;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 22px 24px;
+    border-radius: 14px;
+    overflow-x: auto;
+    background: var(--paper);
+    @include sunk(4px, 10px);
+
+    code {
+      padding: 0;
+      background: none;
+      font-size: inherit;
+    }
+  }
+
+  hr {
+    border: 0;
+    margin-block: 3em;
+    text-align: center;
+
+    &::before {
+      content: "* * *";
+      font-family: $font-mono;
+      letter-spacing: 0.6em;
+      color: var(--accent);
+    }
+  }
+
+  img {
+    border-radius: 14px;
+    @include raised(6px, 16px);
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+
+    th {
+      @include mono-label;
+      text-align: left;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    th, td {
+      padding: 10px 14px;
+    }
+
+    td {
+      border-bottom: 1px dashed var(--rule-soft);
+    }
+  }
+
+  // Mermaid diagrams: debossed plate, auto-numbered "fig. 01"
+  .mermaid {
+    position: relative;
+    margin-block: 2.2em;
+    padding: 44px 20px 28px;
+    border-radius: $radius;
+    background: var(--paper);
+    @include sunk(5px, 12px);
+    overflow-x: auto;
+    text-align: center;
+    counter-increment: fig;
+
+    &::before {
+      content: "fig. " counter(fig, decimal-leading-zero);
+      position: absolute;
+      top: 14px;
+      left: 20px;
+      @include mono-label;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    // Hide raw diagram source until Mermaid has rendered it
+    &:not([data-processed]) {
+      color: transparent;
+      min-height: 180px;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    // Animated "data flowing" edges; !important beats Mermaid's inline styles
+    .edgePath path,
+    .flowchart-link {
+      stroke: var(--muted) !important;
       stroke-dasharray: 8 !important;
       animation: flow_mermaid 0.6s linear infinite !important;
-      stroke: $link-color !important;
     }
 
     marker path {
-      fill: $link-color !important;
-      stroke: $link-color !important;
+      fill: var(--muted) !important;
+      stroke: var(--muted) !important;
+    }
+
+    .edgeLabel,
+    .edgeLabel rect {
+      background-color: var(--paper) !important;
+      fill: var(--paper) !important;
+      color: var(--ink) !important;
     }
   }
 }
@@ -105,57 +265,196 @@
   to { stroke-dashoffset: 0; }
 }
 
-.author-box {
-  margin-top: $spacing-unit * 2;
-  border-left: 4px solid $accent-color;
-  font-family: $font-sans;
+// Minimal Rouge syntax palette built from the theme tokens
+.highlight {
+  .c, .c1, .cm, .cs { color: var(--muted); font-style: italic; }
+  .k, .kd, .kn, .kr, .kt, .o { color: var(--accent-text); }
+  .s, .s1, .s2, .sb, .sd, .sx { color: #5F7A52; }
+  .m, .mi, .mf, .mh { color: var(--accent-text); }
+  .nf, .nc, .nn { color: var(--ink); font-weight: 600; }
+  .nb, .bp, .nv { color: var(--ink-soft); }
+}
 
-  &:hover {
-    transform: none;
+[data-theme="dark"] .highlight {
+  .s, .s1, .s2, .sb, .sd, .sx { color: #A7C29A; }
+}
+
+// ---------------------------------------------------------------- Post footer
+
+.post-footer {
+  display: grid;
+  gap: 30px;
+  margin-top: 72px;
+}
+
+.author-box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 22px;
+  padding: 30px;
+  border-radius: $radius;
+  background: var(--paper);
+  @include raised(8px, 20px);
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+
+.author-avatar {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  font-family: $font-display;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--accent);
+  @include sunk(3px, 8px);
+}
+
+.author-label {
+  @include mono-label;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.author-name {
+  font-family: $font-display;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.3;
+
+  a:hover {
+    color: var(--accent-text);
+  }
+}
+
+.author-bio {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 8px 0 18px;
+}
+
+.author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  a {
+    display: block;
+    padding: 20px 22px;
+    border-radius: 16px;
+    background: var(--paper);
+    @include raised(5px, 14px);
+    transition: box-shadow 0.25s ease, color $transition-speed ease;
+
+    &:hover strong {
+      color: var(--accent-text);
+    }
+
+    &:active {
+      @include sunk(3px, 8px);
+    }
+  }
+
+  span {
+    @include mono-label;
+    color: var(--muted);
+  }
+
+  strong {
+    display: block;
+    margin-top: 6px;
+    font-family: $font-display;
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.3;
+    transition: color $transition-speed ease;
+  }
+
+  .post-nav-next {
+    grid-column: 2;
+    text-align: right;
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+
+    .post-nav-next {
+      grid-column: 1;
+    }
+  }
+}
+
+// ---------------------------------------------------------------- About page
+
+.callout {
+  position: relative;
+  padding: 24px 26px;
+  border-radius: $radius;
+  background: var(--paper);
+  @include raised(6px, 16px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22px;
+    bottom: 22px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent);
   }
 
   p {
     margin: 0;
   }
+}
 
-  .author-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: lighten($text-color, 40%);
-  }
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0.5em;
+}
 
-  .author-name {
-    font-size: 1.2rem;
+// ---------------------------------------------------------------- 404
+
+.not-found {
+  text-align: center;
+  padding-block: 40px;
+
+  .not-found-code {
+    font-family: $font-display;
+    font-size: clamp(6rem, 22vw, 11rem);
     font-weight: 600;
-    margin-bottom: 8px;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--ink);
 
-    a {
-      color: $text-color;
-
-      &:hover {
-        color: $accent-color;
-      }
+    em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
     }
   }
 
-  .author-bio {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: lighten($text-color, 15%);
-    margin-bottom: 12px;
-  }
-
-  .author-links {
-    font-size: 0.9rem;
-
-    a {
-      color: $accent-color;
-    }
-
-    span {
-      margin: 0 6px;
-      color: $border-color;
-    }
+  p {
+    margin-block: 18px 34px;
+    @include mono-label;
+    font-size: 0.85rem;
+    color: var(--muted);
   }
 }

@@ -1,19 +1,36 @@
-// Colors
-$bg-color: #EAE0D5; // Almond Cream
-$text-color: #0A0908; // Black
-$link-color: #5E503F; // Stone Brown
-$accent-color: #D35400; // Orange Accent
-$link-hover-color: $accent-color; // Orange Accent
-$border-color: #C6AC8F; // Khaki Beige
-$glass-bg: rgba(234, 224, 213, 0.65); // Semi-transparent Almond Cream
+// Colors live in CSS custom properties (see _base.scss) so light/dark
+// themes can swap at runtime. Sass variables hold everything static.
 
 // Fonts
-$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$font-serif: 'Merriweather', "Times New Roman", Times, serif;
+$font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+$font-serif: 'Source Serif 4', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+$font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
 // Layout
-$content-width: 700px;
+$content-width: 720px;
+$mid-width: 860px;
+$wide-width: 1120px;
 $spacing-unit: 30px;
+$header-height: 64px;
+$radius: 18px;
+$bp-mobile: 640px;
 
-// Transitions
+// Motion
 $transition-speed: 0.3s;
+$ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+// Letterpress (neumorphic) surfaces: paired light/dark shadows on a
+// surface the same color as the page, so elements look embossed into paper.
+@mixin raised($d: 8px, $blur: 18px) {
+  box-shadow: $d $d $blur var(--shadow-dark), (-$d) (-$d) $blur var(--shadow-light);
+}
+
+@mixin sunk($d: 4px, $blur: 10px) {
+  box-shadow: inset $d $d $blur var(--shadow-dark), inset (-$d) (-$d) $blur var(--shadow-light);
+}
+
+@mixin mono-label {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}

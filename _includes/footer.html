@@ -1,11 +1,21 @@
 <footer class="site-footer">
-  <div class="wrapper">
-    <p class="description">{{ site.title | escape }} — {{ site.tagline | escape }}</p>
-    <p class="copyright">&copy; {{ site.time | date: '%Y' }} {{ site.author.name | escape }} · Free to read, free to share.</p>
+  <div class="wrapper wrapper--wide footer-inner">
+    <div class="footer-brand">
+      {%- include logo.html -%}
+      <div>
+        <strong>{{ site.title | escape }}</strong>
+        <span>{{ site.tagline | escape }}</span>
+      </div>
+    </div>
+    <nav class="footer-links" aria-label="Elsewhere">
+      <a class="pill" href="{{ '/feed.xml' | relative_url }}">rss</a>
+      <a class="pill" href="https://www.linkedin.com/in/{{ site.author.linkedin }}/" target="_blank" rel="noopener">linkedin</a>
+      <a class="pill" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">github</a>
+      <a class="pill" href="mailto:{{ site.author.email }}">email</a>
+    </nav>
+    <div class="footer-meta">
+      <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name | escape }} · free to read, free to share</span>
+      <span>compiled {{ site.time | date: '%Y.%m.%d %H:%M' }}</span>
+    </div>
   </div>
 </footer>
-
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
-</script>
